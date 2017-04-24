@@ -1,0 +1,21 @@
+    <div id="suchergebnis" class="mittig abstand">
+        <img id="warteBild" src="/bilder/warten.png" ng-show="wirdGeladen">
+    </div>
+
+        
+    <div ng-repeat="location in locations">
+        <div class="resultBox rand row" >
+            <div class="col-md-2 col-xs-4">
+                <img class="locationImg" src="{{location.image_url}}">
+            </div>
+            <div class="col-md-10 col-xs-14">
+                <h4 class="resultHeader">{{location.name}} - 
+                <button ng-click="lock.show()"class="mitMachButton">0 machen mit</button>
+                </h4>
+                <p>Bewertung: {{location.rating}} </p> 
+                <p>Bewertungen: {{location.review_count}} </p>
+                <p>Preiskategorie: {{location.price}}</p>
+            </div>
+        </div>
+    </div>
+    

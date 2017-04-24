@@ -1,0 +1,59 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<html>
+    <head>
+
+        <!-- Bootstrap + Einbindung der style.css -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link href="style.css" type="text/css" rel="stylesheet">
+
+     
+    </head>
+    <body ng-app="Nightlife" ng-controller="MainController">
+        <div class="background"></div>
+  <div class="vorder">
+        <div class="header mittig abstand">
+            <h1>Was geht heute Abend ab?</h1>
+            <div class="abstand">
+                <img class ="homeBild"src="/bilder/hamburguer.png">
+                <img src="/bilder/cocktail.png">                
+            </div>
+        </div>
+         
+        <div class="homeMain mittig abstand">
+            <h4>
+            Auf was hast du heute Lust? <br>
+            Schau nach und teile es mit deinen Nightlife-Buddys:
+            </h4>
+            <input 
+            placeholder ="wo bist du?" type="text" 
+            class="form-control " 
+            ng-model="sucheData" ng-keypress="suche(sucheData, $event)"
+            >
+        </div>
+    
+    
+        
+        <ng-view></ng-view>
+        
+        
+        
+        
+        </div>
+        
+       
+        
+  
+        <!-- alle js Einbindung -->
+<script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
+<script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.min.js"></script>
+        <!-- eigene JS-Datein -->
+        <script src="app.js"></script>
+        <script src="controllers/mainController.js"></script>
+    </body>
+</html>

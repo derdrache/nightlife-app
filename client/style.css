@@ -1,0 +1,68 @@
+body{
+    color: white;
+    height: 100%;
+    width:  100%; 
+    background-image:url("http://img08.deviantart.net/d1ef/i/2007/145/2/a/city_nightlife_by_maplerose.jpg");
+    background-attachment: fixed;
+}
+
+input::placeholder{
+    text-align: center;
+}
+
+
+
+.mittig{
+ text-align: center;   
+}
+
+.abstand{
+    margin-top: 4%;
+}
+
+.homeBild{
+    margin-right: 30%;
+}
+
+.homeMain{
+    width: 70%;
+    margin-left: 15%;
+}
+
+
+
+#warteBild{
+    animation: turner 4s infinite;
+}
+
+@keyframes turner{
+    from{ transform: rotate(0deg)}
+    to {transform: rotate(720deg)}
+}
+
+/* result */
+
+.rand{
+    border: solid 1px ;
+    border-radius: 10px;
+}
+
+.resultBox{
+    margin-top: 1%;
+    height: 150px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.locationImg{
+    border-radius: 20px;
+    margin-left: 1%;
+    margin-top: 9%;
+    width: auto;
+    height: 110px;
+   
+}
+
+.mitMachButton{
+    background: none;
+}

@@ -1,0 +1,29 @@
+{
+  "name": "nightlife",
+  "version": "1.0.0",
+  "description": "- Layout fertig",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derdrache/nightlife-app.git"
+  },
+  "author": "derdrache",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/derdrache/nightlife-app/issues"
+  },
+  "homepage": "https://github.com/derdrache/nightlife-app#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "connect-ensure-login": "^0.1.1",
+    "express": "^4.15.2",
+    "mongodb": "^2.2.26",
+    "passport": "^0.3.2",
+    "passport-auth0": "^0.6.0",
+    "request": "^2.81.0"
+  }
+}
