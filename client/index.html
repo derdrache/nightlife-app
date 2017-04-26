@@ -47,13 +47,24 @@
         
   
         <!-- alle js Einbindung -->
-<script src="https://cdn.auth0.com/js/lock/10.14/lock.min.js"></script>
-<script src="http://cdn.auth0.com/js/auth0/8.5/auth0.min.js"></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.min.js"></script>
         <!-- eigene JS-Datein -->
         <script src="app.js"></script>
         <script src="controllers/mainController.js"></script>
+        
+<script type="text/javascript">
+    (function(){
+        var p = document.createElement("script");
+        p.type = "text/javascript";
+        p.async = true;
+        p.src= "https://apis.google.com/js/client.js?onload=onLoadFunction";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(p,s);
+    })();
+    
+</script>
     </body>
 </html>

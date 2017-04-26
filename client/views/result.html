@@ -2,6 +2,7 @@
         <img id="warteBild" src="/bilder/warten.png" ng-show="wirdGeladen">
     </div>
 
+
         
     <div ng-repeat="location in locations">
         <div class="resultBox rand row" >
@@ -10,7 +11,7 @@
             </div>
             <div class="col-md-10 col-xs-14">
                 <h4 class="resultHeader">{{location.name}} - 
-                <button ng-click="lock.show()"class="mitMachButton">0 machen mit</button>
+                <button ng-click="onGoogleLogin(location.name)"class="mitMachButton">0 machen mit</button>
                 </h4>
                 <p>Bewertung: {{location.rating}} </p> 
                 <p>Bewertungen: {{location.review_count}} </p>
