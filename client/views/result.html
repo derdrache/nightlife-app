@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-10 col-xs-14">
                 <h4 class="resultHeader">{{location.name}} - 
-                <button ng-click="onGoogleLogin(location.name)"class="mitMachButton">0 machen mit</button>
+                <button ng-click="onGoogleLogin(location.name)"class="mitMachButton">{{location.teilnehmer || 0}} machen mit</button>
                 </h4>
                 <p>Bewertung: {{location.rating}} </p> 
                 <p>Bewertungen: {{location.review_count}} </p>

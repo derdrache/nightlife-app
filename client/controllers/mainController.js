@@ -3,19 +3,40 @@ app.controller('MainController', ['$scope', "$http","$location","$cookies", func
     
     $scope.wirdGeladen = false;
     $scope.locations= [];
+    $scope.teilnehmer={};
+
+    
+
    
     $scope.suche = function(suchDaten, key){
         if (key.charCode === 13){
+            $cookies.put("suche", suchDaten);
             $location.path("/result");
             $scope.wirdGeladen = true;
             $http.post("/",  {"suche":suchDaten}).success(function(res){
-                $scope.locations = res.businesses;
+                var businesses = res.businesses;
+                
                 $scope.wirdGeladen = false;
+                   $http.get("/result").success(function(daten){
+
+                        for (var i = 0; i<businesses.length; i++){
+                            for (var j = 0; j < daten[0].location.length; j++){
+                                if (businesses[i].name == daten[0].location[j]){
+                                    businesses[i].teilnehmer = daten[0].teilnehmer[j]
+                                }                        
+                            }
+                        } 
+                        
+                    $scope.locations = businesses;    
+                })
+               
             })
         }
 
     }
     
+
+
 
     
     $scope.gmail= { 
@@ -24,6 +45,7 @@ app.controller('MainController', ['$scope', "$http","$location","$cookies", func
     }
     
     $scope.onGoogleLogin = function(locationName){
+        console.log($scope.locations)
         if (!$cookies.get("email")){
             var params = {
                 "clientid": "42885971084-rm9b9e16dpl60lreonr7gm0uvupv04lk.apps.googleusercontent.com",
@@ -41,7 +63,7 @@ app.controller('MainController', ['$scope', "$http","$location","$cookies", func
                                     $scope.gmail.username= resp.displayName;
                                     $scope.gmail.email = resp.emails[0].value;
                                     $cookies.put("email", resp.emails[0].value)
-                                    console.log($scope.gmail)
+                                    
                                 })
                             })
                     }
@@ -52,27 +74,42 @@ app.controller('MainController', ['$scope', "$http","$location","$cookies", func
             gapi.auth.signIn(params);
         }  
         else{
-            var dabei = 0;
-            if (!$cookies.get("locationName")){
-                $cookies.put("locationName", true);
-                dabei = 1;
+            var dabei ={
+                "standort": $cookies.get("suche"),
+                "location": locationName,
+                "zahl": 0
+            };
+            if (!$cookies.get(locationName)){
+                $cookies.put(locationName, true);
+                dabei.zahl = 1;
+                //alert("add")
                 //hinzufügen
             }
             else{
                 //reduzieren
-                $cookies.put("locationName", false);
-                dabei = -1;
+                $cookies.remove(locationName);
+                dabei.zahl = -1;
+                //alert("reduce")
             }
-            $http.post("/result", dabei).success(function(res){
-                console.og(res);
+            
+            $http.post("/result", dabei ).success(function(res){
+                for (var i = 0; i<$scope.locations.length; i++){
+                    for (var j = 0; j < res.location.length; j++){
+                        if ($scope.locations[i].name == res.location[j]){
+                            $scope.locations[i].teilnehmer = res.teilnehmer[j]
+                        }                        
+                    }
+                }
+            
             })
   
         }
-        
-        
-        
-        
     }
+
+    
+
+
+
 
 
 }]);

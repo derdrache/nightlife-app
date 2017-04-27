@@ -4,7 +4,8 @@ var app = angular
  app.config(function($routeProvider) {
     $routeProvider
     .when("/result", {
-        templateUrl: "views/result.html"
+        templateUrl: "views/result.html",
+        controller: "resultController"
     })
 
 });

@@ -6,7 +6,7 @@ const mongoClient = require("mongodb").MongoClient;
 
 
 const dburl = "mongodb://webapps:webapps@ds157500.mlab.com:57500/webapps";
-const url = "https://dynamic-web-application-projects-derdrache.c9users.io/";
+
 
 
 
@@ -36,18 +36,92 @@ app.post("/", function(req,res){
     }
     
     request.get(apiSearch, function (req,result){
-        var apiData = res.body;
-    
         res.send(result.body)
+        
     })
     
-})
+});
+
+
+app.post("/result", function(req,res){
+    
+    mongoClient.connect(dburl, function(err,db){
+        if (err) throw err;
+       
+        db.collection("nightlife_locations").find({"standort": req.body.standort}).toArray(function(err,result){
+            if (err) throw err;
+           
+          if (result == 0){
+              db.collection("nightlife_locations").insert({
+                  "standort": req.body.standort,
+                  "location": [req.body.location],
+                  "teilnehmer": [req.body.zahl]
+              })
+          }
+          else{
+              var index = 0;
+              for (var i = 0; i< result[0].location.length; i++){
+                  if (result[0].location[i] == req.body.location){
+                        var change = result[0].teilnehmer;
+                        change[i] = change[i] + req.body.zahl
+                      db.collection("nightlife_locations").update({"standort": req.body.standort},
+                      {$set:
+                      {"teilnehmer": change}
+                      })
+                      break;
+                  }
+                  index++
+              }
+              
+              if (index == result[0].location.length){
+                  var location = result[0].location;
+                    location.push(req.body.location);
+                  var teilnehmer = result[0].teilnehmer;
+                    teilnehmer.push(req.body.zahl);
+                  
+                  
+                  db.collection("nightlife_locations").update({"standort": req.body.standort},
+                  {$set:
+                      {"location": location,
+                        "teilnehmer": teilnehmer  
+                      }
+                  })
+              }
+              
+          }
+        db.collection("nightlife_locations").find({"standort": req.body.standort}).toArray(function(err,result){
+            if (err) throw err;
+            
+            res.send(result[0])
+        }) 
+            
+            
+        
+        db.close();    
+        });
+    });
+    
+});
 
 
 
-
-
- 
+app.get("/result", function(req,res){
+    mongoClient.connect(dburl, function(err,db){
+        if (err) throw err;
+        
+        db.collection("nightlife_locations").find({}).toArray(function(err,result){
+            if (err) throw err;
+            
+            res.send(result);
+        })
+         db.close();
+    })
+    
+    
+    
+    
+   
+}) 
 
 
        
